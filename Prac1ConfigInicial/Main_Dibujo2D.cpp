@@ -142,7 +142,7 @@ int main() {
 		0.15, -0.60f, 0.0f,   1.0f, 0.8f, 0.2f, // 73
 		0.20, -0.54f, 0.0f,   1.0f, 0.9f, 0.1f, // 74
 		0.21, -0.50f, 0.0f,   1.0f, 0.5f, 0.5f, // 75
-		0.3f, -0.48f, 0.0f,   1.0f, 0.6f, 0.4f, // 76
+		0.3f, -0.48f, 0.0f,   1.0f, 0.0f, 0.5f, // 76
 		0.38f, -0.40f, 0.0f,   1.0f, 0.7f, 0.3f, // 77
 		0.28f, -0.38f, 0.0f,   1.0f, 0.8f, 0.2f, // 78
 		0.22f, -0.37f, 0.0f,   1.0f, 0.9f, 0.1f, // 79
@@ -161,10 +161,17 @@ int main() {
 
 	unsigned int indices[] = {  // note that we start from 0!
 		// Delineado del contorno (Silhouette)
-		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 
-		28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47,
-		48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
-		68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 0
+		0,1,2,0,86,2,86,2,85,3,4,85,2,3,85,4,5,85,5,84,85,5,6,84,6,7,84,7,84,83,7,8,83,8,9,83,
+		82,83,9,10,9,82,10,14,82,13,14,10,11,12,13,11,10,13,14,82,15,82,15,16,82,16,17,82,81,17,
+		81,18,19,81,17,18,81,80,19,19,20,79,79,78,20,80,79,19,78,67,21,67,21,66,21,22,78,
+		66,65,22,20,21,78,65,66,22,67,66,22,23,24,65,22,23,65,23,24,64,63,64,24,64,65,23,
+		63,24,48,24,25,48,25,26,27,48,47,27,27,28,47,47,46,28,45,46,28,28,29,45,44,45,29,
+		30,29,44,43,44,30,30,31,43,42,43,31,41,42,31,40,41,31,31,32,40,39,40,32,38,39,32,
+		33,32,38,37,38,33,36,37,33,35,36,33,34,33,35,48,49,63,49,50,63,51,50,63,52,51,63,
+		52,53,63,53,54,63,55,54,63,56,55,63,56,55,53,57,56,63,58,57,63,59,58,63,59,60,61,
+		61,62,59,62,63,59,67,78,77,67,77,68,77,68,69,77,76,69,76,77,69,76,77,69,70,69,76,
+		70,75,76,74,75,70,74,70,75,74,70,71,71,72,74,72,73,74,78,67,22
+
 		// Nota: El último conecta con el principio o cerca de él para cerrar formas
 		
 	};
@@ -210,7 +217,7 @@ int main() {
 
 		// Render
 		// Clear the colorbuffer
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 
@@ -225,20 +232,20 @@ int main() {
         
         //glDrawArrays(GL_LINES,2,3); //unir puntos
 		//glDrawArrays(GL_LINE_LOOP, 0, 4); //unir lineas desde el punto x al ultimo punto y
-		//glDrawArrays(GL_TRIANGLES, 1, 3); //dibujar triangulo con los puntos 1,2,3
-        //glDrawElements(GL_TRIANGLES, 6,GL_UNSIGNED_INT,0); //dibujar triangulo con los puntos 1,2,3 usando indices
-
+		//glDrawArrays(GL_TRIANGLES, 0, 3); //dibujar triangulo con los puntos 1,2,3
+        //glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0); //dibujar triangulo con los puntos 1,2,3 usando indices
+		glDrawElements(GL_TRIANGLES, 300, GL_UNSIGNED_INT, 0);
 		// Opcional: Aumentar grosor de línea para estilo "neon"
 		glLineWidth(2.0f);
 		glPointSize(10.0f); // Para ver los vertices como puntos guía
 
-		// 1. Dibujar los Puntos (Para que veas dónde caen las coordenadas)
 		//glDrawArrays(GL_POINTS, 0, 87);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		// 2. Dibujar las Líneas conectando los puntos (Usando los indices del EBO)
 		// Nota: Como estamos usando indices, usamos glDrawElements
 		// GL_LINE_STRIP: Une punto A con B, B con C...
-		glDrawElements(GL_LINE_STRIP, 88, GL_UNSIGNED_INT, 0);
+		//glDrawElements(GL_LINE_STRIP, 88, GL_UNSIGNED_INT, 0);
 
         glBindVertexArray(0);
     
