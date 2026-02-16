@@ -1,5 +1,6 @@
 // Práctica 2: Dibujo de Primitivas en 2D
 // Autor: Eric Ramírez Valdovinos
+// No. de cuenta: 423095203
 // Fecha: 15/02/2026
 // Descripción: Usando diferentes primitivas de OpenGL buscando dibujar una imagen con los puntos dados.
  
@@ -66,16 +67,16 @@ int main() {
 	float vertices[] = {
 		// ===== PATA TRASERA =====
 		-0.84f, -0.88f, 0.0f,   1.0f, 0.0f, 0.5f, // 0  Pezuña trasera inicio
-		-0.89f, -0.75f, 0.0f,   1.0f, 0.5f, 0.0f, // 1  Pezuña trasera final
-		-0.86f, -0.68f, 0.0f,   1.0f, 0.3f, 0.3f, // 2  Talón trasero
-		-0.80f, -0.60f, 0.0f,   0.8f, 0.2f, 0.6f, // 3  Rodilla trasera
-		-0.76f, -0.56f, 0.0f,   1.0f, 1.0f, 0.0f, // 4  Inicio cola
-		-0.71f, -0.44f, 0.0f,   1.0f, 0.4f, 0.5f, // 5  Cadera
-		-0.68f, -0.35f, 0.0f,   0.7f, 0.8f, 0.3f, // 6  Trasero superior
+		-0.89f, -0.75f, 0.0f,   1.0f, 0.5f, 0.0f, // 1    
+		-0.86f, -0.68f, 0.0f,   1.0f, 0.3f, 0.3f, // 2   
+		-0.80f, -0.60f, 0.0f,   0.8f, 0.2f, 0.6f, // 3   
+		-0.76f, -0.56f, 0.0f,   1.0f, 1.0f, 0.0f, // 4   
+		-0.71f, -0.44f, 0.0f,   1.0f, 0.4f, 0.5f, // 5  
+		-0.68f, -0.35f, 0.0f,   0.7f, 0.8f, 0.3f, // 6   
 		// COLA
-		-0.6f, -0.3f, 0.0f,   0.2f, 1.0f, 0.5f, // 7  Espalda baja
-		-0.55f, -0.25f, 0.0f,   0.3f, 0.9f, 0.4f, // 8  Espalda media
-		-0.51f, -0.14f, 0.0f,   1.0f, 0.5f, 0.0f, // 9  Hombro
+		-0.6f, -0.3f, 0.0f,   0.2f, 1.0f, 0.5f, // 7   
+		-0.55f, -0.25f, 0.0f,   0.3f, 0.9f, 0.4f, // 8   
+		-0.51f, -0.14f, 0.0f,   1.0f, 0.5f, 0.0f, // 9  
 		-0.50f, -0.05f, 0.0f,   1.0f, 0.0f, 1.0f, // 10  Base cabeza
 		-0.55f,  0.00f, 0.0f,   1.0f, 0.2f, 0.6f, // 11 Mejilla
 		-0.59f,  0.08f, 0.0f,   1.0f, 0.6f, 0.2f, // 12 Frente
@@ -159,8 +160,7 @@ int main() {
 
 	};
 
-	unsigned int indices[] = {  // note that we start from 0!
-		// Delineado del contorno (Silhouette)
+	unsigned int indices[] = { 
 		0,1,2,0,86,2,86,2,85,3,4,85,2,3,85,4,5,85,5,84,85,5,6,84,6,7,84,7,84,83,7,8,83,8,9,83,
 		82,83,9,10,9,82,10,14,82,13,14,10,11,12,13,11,10,13,14,82,15,82,15,16,82,16,17,82,81,17,
 		81,18,19,81,17,18,81,80,19,19,20,79,79,78,20,80,79,19,78,67,21,67,21,66,21,22,78,
@@ -171,8 +171,6 @@ int main() {
 		52,53,63,53,54,63,55,54,63,56,55,63,56,55,53,57,56,63,58,57,63,59,58,63,59,60,61,
 		61,62,59,62,63,59,67,78,77,67,77,68,77,68,69,77,76,69,76,77,69,76,77,69,70,69,76,
 		70,75,76,74,75,70,74,70,75,74,70,71,71,72,74,72,73,74,78,67,22
-
-		// Nota: El último conecta con el principio o cerca de él para cerrar formas
 		
 	};
 
@@ -245,7 +243,7 @@ int main() {
 		// 2. Dibujar las Líneas conectando los puntos (Usando los indices del EBO)
 		// Nota: Como estamos usando indices, usamos glDrawElements
 		// GL_LINE_STRIP: Une punto A con B, B con C...
-		//glDrawElements(GL_LINE_STRIP, 88, GL_UNSIGNED_INT, 0);
+		//glDrawElements(GL_LINE_STRIP, 270, GL_UNSIGNED_INT, 0);
 
         glBindVertexArray(0);
     
