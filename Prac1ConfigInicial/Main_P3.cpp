@@ -1,8 +1,7 @@
 //Eric Ramírez Valdovinos
 //423095203
-//Previo 3: Proyeciones, tranformaciones y Shaders en OpenGL
-//Fecha de entrega: 17 de febrero de 2026
-//Descipción: En este ejercicio se pide implementar un programa que muestre un cubo con colores en cada cara, utilizando proyecciones ortográficas y perspectiva, así como transformaciones básicas. El programa debe permitir al usuario cambiar entre las dos proyecciones y aplicar transformaciones como rotación, traslación y escalado al cubo. Además, se deben utilizar shaders para renderizar el cubo de manera eficiente y con efectos visuales adecuados.|
+//Práctica 3: Proyecciones y transformaciones
+//Fecha de entrega: 22 de febrero de 2026
 
 #include<iostream>
 
@@ -35,7 +34,7 @@ int main() {
 
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Proyecciones y transformaciones basicas - Eric Ramírez", nullptr, nullptr);
+	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Práctica 3: Proyecciones y transformaciones basicas - Eric Ramírez", nullptr, nullptr);
 
 	int screenWidth, screenHeight;
 
@@ -206,7 +205,7 @@ int main() {
 	
 	glm::mat4 projection=glm::mat4(1);
 
-	projection = glm::perspective(45.0f, (GLfloat)screenWidth / (GLfloat)screenHeight, 0.1f, 100.0f);//FOV, Radio de aspecto,znear,zfar
+	projection = glm::perspective(45.4f, (GLfloat)screenWidth / (GLfloat)screenHeight, 0.1f, 1000.0f);//FOV, Radio de aspecto,znear,zfar
 	//projection = glm::ortho(0.0f, (GLfloat)screenWidth, 0.0f, (GLfloat)screenHeight, 0.1f, 1000.0f);//Izq,Der,Fondo,Alto,Cercania,Lejania
 	while (!glfwWindowShouldClose(window))
 	{
@@ -215,7 +214,7 @@ int main() {
 
 		// Render
 		// Clear the colorbuffer
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		glClearColor(1.0f, 0.5f, 0.5f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
 
 
@@ -224,9 +223,9 @@ int main() {
 		glm::mat4 model=glm::mat4(1);
 		glm::mat4 view=glm::mat4(1);
 	
-	    view = glm::translate(view, glm::vec3(-3.0f,0.0f,-15.0f));
-		model = glm::rotate( model, 0.5f, glm::vec3( 0.5f, 1.0f, 0.2f ) ); // use to compare orthographic and perspective projection
-		model = glm::scale(model, glm::vec3(3.0f, 3.0f, 3.0f));
+	    view = glm::translate(view, glm::vec3(0.0f,-15.f,-25.0f));
+		model = glm::rotate( model, 0.5f, glm::vec3( 0.0f, 1.0f, 0.0f ) ); // use to compare orthographic and perspective projection
+		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
 		//view = glm::translate( view, glm::vec3( screenWidth / 2, screenHeight / 1,-800.0f ) ); // use with orthographic projection
 		
 		GLint modelLoc = glGetUniformLocation(ourShader.Program, "model");
@@ -240,24 +239,31 @@ int main() {
 
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36); // primer cubo
+
 		model = glm::mat4(1);
-		model = glm::translate(model,glm::vec3( 3.0f, 0.0f, -15.0f));
-		model = glm::rotate(model, 0.5f, glm::vec3(0.5f, 1.0f, 0.2f));
-		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
-
+		model = glm::translate(model,glm::vec3( 3.75f, 4.5f, 0.0f));
+		model = glm::rotate(model, -0.9f, glm::vec3(0.0f, 0.9f, 0.0f));
+		model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
 		glDrawArrays(GL_TRIANGLES, 0, 36);// segundo cubo 
 
 		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(0.0f, -6.0f, -5.0f));
-		model = glm::rotate(model, 0.5f, glm::vec3(1.0f, 0.0f, 1.0f));
-		model = glm::scale(model, glm::vec3(7.0f, 1.0f, 1.0f));
+		model = glm::translate(model, glm::vec3(1.0f, 9.2f, 3.0f));
+		model = glm::rotate(model, -3.0f, glm::vec3(13.0, 0.0f, 3.0f));
+		model = glm::scale(model, glm::vec3(3.5f, 3.5f, 3.5f));
 
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 		glDrawArrays(GL_TRIANGLES, 0, 36);// tercer cubo 
 
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(0.0f, 13.0f, 5.0f));
+		model = glm::rotate(model, 2.0f, glm::vec3(3.0f, -1.0f, 0.8f));
+		model = glm::scale(model, glm::vec3(2.5f, 2.5f, 2.5f));
+
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+		glDrawArrays(GL_TRIANGLES, 0, 36);// cuarto cubo 
 		glBindVertexArray(0);
 
 
