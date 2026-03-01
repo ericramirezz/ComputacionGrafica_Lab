@@ -114,14 +114,14 @@ int main() {
 		-0.5f, -0.5f,  0.5f,  0.5176f, 0.2039f, 0.0078f,
 		-0.5f,  0.5f,  0.5f,  0.5176f, 0.2039f, 0.0078f,
 		
-		-0.5f, -0.5f, -0.5f, 0.5176f, 0.2039f, 0.0078f,
-		0.5f, -0.5f, -0.5f,  0.5176f, 0.2039f, 0.0078f,
-		0.5f, -0.5f,  0.5f,  0.5176f, 0.2039f, 0.0078f,
-		0.5f, -0.5f,  0.5f,  0.5176f, 0.2039f, 0.0078f,
-		-0.5f, -0.5f,  0.5f, 0.5176f, 0.2039f, 0.0078f,
-		-0.5f, -0.5f, -0.5f, 0.5176f, 0.2039f, 0.0078f,
+		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 0.0f,
+		0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 0.0f,
+		0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 0.0f,
+		-0.5f, -0.5f,  0.5f, 0.0f, 0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
 		
-		-0.5f,  0.5f, -0.5f, 0.765f, 0.376f, 0.000f,
+		-0.5f,  0.5f, -0.5f, 0.765f, 0.376f, 0.000,
 		0.5f,  0.5f, -0.5f,  0.765f, 0.376f, 0.000f,
 		0.5f,  0.5f,  0.5f,  0.765f, 0.376f, 0.000f,
 		0.5f,  0.5f,  0.5f,  0.765f, 0.376f, 0.000f,
@@ -200,25 +200,55 @@ int main() {
 	
 
 		glBindVertexArray(VAO);
-		
+
+
+		//OREJA IZQUIERDA
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.15f, 0.28, 0.15f));
+		model = glm::translate(model, glm::vec3(-1.1f, 7.5, 0.2f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//OREJA DERECHA
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.15f, 0.28, 0.15f));
+		model = glm::translate(model, glm::vec3(1.1f, 7.5, 0.2f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
 		//CABEZA
 	    model = glm::mat4(1.0f);
-		model = glm::scale(model, glm::vec3(0.5f, 0.8f, 0.6f)); // escalado de la cabeza de la mama
-		model = glm::translate(model, glm::vec3(0.0f, 2.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.5f, 0.7f, 0.4f)); // escalado de la cabeza de la mama
+		model = glm::translate(model, glm::vec3(0.0f, 2.3f, 0.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		//glBindVertexArray(0);
+		
 		//PECHO
 		model = glm::mat4(1.0f);
-		model = glm::scale(model, glm::vec3(1.0f, 0.9f, 0.9f));
+		model = glm::scale(model, glm::vec3(1.0f, 0.9f, 0.5f));
 		model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.1f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		//TRONCO
 		model = glm::mat4(1.0f);
-		model = glm::scale(model, glm::vec3(1.2, 1.0f, 1.1f));
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.13f));
+		model = glm::scale(model, glm::vec3(1.0, 1.0f, 1.1f));
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.25f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//CAIDA COLA VERTICAL
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.55f, 1.2f, 0.18f));
+		model = glm::translate(model, glm::vec3(0.0f, -0.3f, -1.9f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//CAIDA COLA HORIZONTAL
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.55f, 0.2f, 0.50f));
+		model = glm::translate(model, glm::vec3(0.0f, -4.3f, -1.2f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
@@ -232,7 +262,7 @@ int main() {
 		//ANTEBRAZO IZQUIERDO
 		model = glm::mat4(1.0f);
 		model = glm::scale(model, glm::vec3(0.15f, 0.1, 0.5f)); // 
-		model = glm::translate(model, glm::vec3(-3.8f, 6.0, 0.2f)); //
+		model = glm::translate(model, glm::vec3(-3.8f, 6.1, 0.2f)); //
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
@@ -246,9 +276,53 @@ int main() {
 		//ANTEBRAZO DERECHO
 		model = glm::mat4(1.0f);
 		model = glm::scale(model, glm::vec3(0.15f, 0.1, 0.5f)); // 
-		model = glm::translate(model, glm::vec3(3.8f, 6.0, 0.2f)); //
+		model = glm::translate(model, glm::vec3(3.8f, 6.1, 0.2f)); //
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//MUSLO IZQUIERDO
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.2f, 0.65f, 0.8f));
+		model = glm::translate(model, glm::vec3(-3.0f, -0.2f, 0.2f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//MUSLO DERECHO
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.2f, 0.65f, 0.8f));
+		model = glm::translate(model, glm::vec3(3.0f, -0.2f, 0.2f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//FEMUR DERECHO
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.2f, 0.6f, 0.3f));
+		model = glm::translate(model, glm::vec3(-3.0f, -1.0f, -0.2f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//FEMUR IZQUIERDO
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.2f, 0.6f, 0.3f));
+		model = glm::translate(model, glm::vec3(3.0f, -1.0f, -0.2f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//PIE DERECHO
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.2f, 0.1f, 0.7f));
+		model = glm::translate(model, glm::vec3(-3.0f, -8.5f, 0.2f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//PIE IZQUIERDO
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.2f, 0.1f, 0.7f));
+		model = glm::translate(model, glm::vec3(3.0f, -8.5f, 0.2f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		
 
 		// Swap the screen buffers
 		glfwSwapBuffers(window);
