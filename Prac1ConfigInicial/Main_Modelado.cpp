@@ -86,12 +86,12 @@ int main() {
 
 	// use with Perspective Projection
 	float vertices[] = {
-		-0.5f, -0.5f, 0.5f, 0.5176f, 0.2039f, 0.0078f,//Front
-		0.5f, -0.5f, 0.5f,  0.5176f, 0.2039f, 0.0078f,
-		0.5f,  0.5f, 0.5f, 0.5176f, 0.2039f, 0.0078f,
-		0.5f,  0.5f, 0.5f,  0.5176f, 0.2039f, 0.0078f,
-		-0.5f,  0.5f, 0.5f, 0.5176f, 0.2039f, 0.0078f,
-		-0.5f, -0.5f, 0.5f, 0.5176f, 0.2039f, 0.0078f,
+		-0.5f, -0.5f, 0.5f, 0.608f, 0.220f, 0.016f,//Front
+		0.5f, -0.5f, 0.5f,  0.608f, 0.220f, 0.016f,
+		0.5f,  0.5f, 0.5f, 0.608f, 0.220f, 0.016f,
+		0.5f,  0.5f, 0.5f,  0.608f, 0.220f, 0.016f,
+		-0.5f,  0.5f, 0.5f, 0.608f, 0.220f, 0.016f,
+		-0.5f, -0.5f, 0.5f, 0.608f, 0.220f, 0.016f,
 		
 	    -0.5f, -0.5f,-0.5f, 0.5176f, 0.2039f, 0.0078f,//Back
 		 0.5f, -0.5f,-0.5f, 0.5176f, 0.2039f, 0.0078f,
@@ -129,26 +129,155 @@ int main() {
 		-0.5f,  0.5f, -0.5f, 0.765f, 0.376f, 0.000f,
 	};
 
+	float verticesojosnegros[] = {
+		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 0.0f,//Front
+		0.5f, -0.5f, 0.5f,  0.0f, 0.0f, 0.0f,
+		0.5f,  0.5f, 0.5f, 0.0f, 0.0f, 0.0f,
+		0.5f,  0.5f, 0.5f,  0.0f, 0.0f, 0.0f,
+		-0.5f,  0.5f, 0.5f, 0.0f, 0.0f, 0.0f,
+		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 0.0f,
+
+		-0.5f, -0.5f,-0.5f, 0.0f, 0.0f, 0.0f,//Back
+		 0.5f, -0.5f,-0.5f, 0.0f, 0.0f, 0.0f,
+		 0.5f,  0.5f,-0.5f, 0.0f, 0.0f, 0.0f,
+		 0.5f,  0.5f,-0.5f, 0.0f, 0.0f, 0.0f,
+		-0.5f,  0.5f,-0.5f, 0.0f, 0.0f, 0.0f,
+		-0.5f, -0.5f,-0.5f, 0.0f, 0.0f, 0.0f,
+
+		 0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 0.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,  0.0f, 0.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,  0.0f, 0.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 0.0f,
+		 0.5f,  -0.5f, 0.5f, 0.0f, 0.0f, 0.0f,
+
+		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f, 0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 0.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 0.0f,
+
+		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 0.0f,
+		0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 0.0f,
+		0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 0.0f,
+		-0.5f, -0.5f,  0.5f, 0.0f, 0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+
+		-0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		0.5f,  0.5f, -0.5f,  0.0f, 0.0f, 0.0f,
+		0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 0.0f,
+		0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		};
+
+	float verticesbeigeclaro[] = {
+		-0.5f, -0.5f, 0.5f, 0.812f, 0.643f, 0.392f,//Front
+		0.5f, -0.5f, 0.5f,  0.812f, 0.643f, 0.392f,
+		0.5f,  0.5f, 0.5f, 0.812f, 0.643f, 0.392f,
+		0.5f,  0.5f, 0.5f,  0.812f, 0.643f, 0.392f,
+		-0.5f,  0.5f, 0.5f, 0.812f, 0.643f, 0.392f,
+		-0.5f, -0.5f, 0.5f, 0.812f, 0.643f, 0.392f,
+
+		-0.5f, -0.5f,-0.5f, 0.812f, 0.643f, 0.392f,//Back
+		 0.5f, -0.5f,-0.5f, 0.812f, 0.643f, 0.392f,
+		 0.5f,  0.5f,-0.5f, 0.812f, 0.643f, 0.392f,
+		 0.5f,  0.5f,-0.5f, 0.812f, 0.643f, 0.392f,
+		-0.5f,  0.5f,-0.5f, 0.812f, 0.643f, 0.392f,
+		-0.5f, -0.5f,-0.5f, 0.812f, 0.643f, 0.392f,
+
+		 0.5f, -0.5f,  0.5f,  0.812f, 0.643f, 0.392f,
+		 0.5f, -0.5f, -0.5f,  0.812f, 0.643f, 0.392f,
+		 0.5f,  0.5f, -0.5f,  0.812f, 0.643f, 0.392f,
+		 0.5f,  0.5f, -0.5f,  0.812f, 0.643f, 0.392f,
+		 0.5f,  0.5f,  0.5f,  0.812f, 0.643f, 0.392f,
+		 0.5f,  -0.5f, 0.5f, 0.812f, 0.643f, 0.392f,
+
+		-0.5f,  0.5f,  0.5f,  0.812f, 0.643f, 0.392f,
+		-0.5f,  0.5f, -0.5f,  0.812f, 0.643f, 0.392f,
+		-0.5f, -0.5f, -0.5f,  0.812f, 0.643f, 0.392f,
+		-0.5f, -0.5f, -0.5f,  0.812f, 0.643f, 0.392f,
+		-0.5f, -0.5f,  0.5f,  0.812f, 0.643f, 0.392f,
+		-0.5f,  0.5f,  0.5f,  0.812f, 0.643f, 0.392f,
+
+		-0.5f, -0.5f, -0.5f, 0.812f, 0.643f, 0.392f,
+		0.5f, -0.5f, -0.5f,  0.812f, 0.643f, 0.392f,
+		0.5f, -0.5f,  0.5f,  0.812f, 0.643f, 0.392f,
+		0.5f, -0.5f,  0.5f,  0.812f, 0.643f, 0.392f,
+		-0.5f, -0.5f,  0.5f, 0.812f, 0.643f, 0.392f,
+		-0.5f, -0.5f, -0.5f, 0.812f, 0.643f, 0.392f,
+
+		-0.5f,  0.5f, -0.5f, 0.812f, 0.643f, 0.392f,
+		0.5f,  0.5f, -0.5f,  0.812f, 0.643f, 0.392f,
+		0.5f,  0.5f,  0.5f,  0.812f, 0.643f, 0.392f,
+		0.5f,  0.5f,  0.5f,  0.812f, 0.643f, 0.392f,
+		-0.5f,  0.5f,  0.5f, 0.812f, 0.643f, 0.392f,
+		-0.5f,  0.5f, -0.5f, 0.812f, 0.643f, 0.392f,
+		};
+
+	float verticesrositaboca[] = {
+		-0.5f, -0.5f, 0.5f, 0.659f, 0.353f, 0.235f,//Front
+		0.5f, -0.5f, 0.5f,  0.659f, 0.353f, 0.235f,
+		0.5f,  0.5f, 0.5f, 0.659f, 0.353f, 0.235f,
+		0.5f,  0.5f, 0.5f,  0.659f, 0.353f, 0.235f,
+		-0.5f,  0.5f, 0.5f, 0.659f, 0.353f, 0.235f,
+		-0.5f, -0.5f, 0.5f, 0.659f, 0.353f, 0.235f,
+
+		-0.5f, -0.5f,-0.5f, 0.659f, 0.353f, 0.235f,//Back
+		 0.5f, -0.5f,-0.5f, 0.659f, 0.353f, 0.235f,
+		 0.5f,  0.5f,-0.5f, 0.659f, 0.353f, 0.235f,
+		 0.5f,  0.5f,-0.5f, 0.659f, 0.353f, 0.235f,
+		-0.5f,  0.5f,-0.5f, 0.659f, 0.353f, 0.235f,
+		-0.5f, -0.5f,-0.5f, 0.659f, 0.353f, 0.235f,
+
+		 0.5f, -0.5f,  0.5f,  0.659f, 0.353f, 0.235f,
+		 0.5f, -0.5f, -0.5f,  0.659f, 0.353f, 0.235f,
+		 0.5f,  0.5f, -0.5f,  0.659f, 0.353f, 0.235f,
+		 0.5f,  0.5f, -0.5f,  0.659f, 0.353f, 0.235f,
+		 0.5f,  0.5f,  0.5f,  0.659f, 0.353f, 0.235f,
+		 0.5f,  -0.5f, 0.5f, 0.659f, 0.353f, 0.235f,
+
+		-0.5f,  0.5f,  0.5f,  0.659f, 0.353f, 0.235f,
+		-0.5f,  0.5f, -0.5f,  0.659f, 0.353f, 0.235f,
+		-0.5f, -0.5f, -0.5f,  0.659f, 0.353f, 0.235f,
+		-0.5f, -0.5f, -0.5f,  0.659f, 0.353f, 0.235f,
+		-0.5f, -0.5f,  0.5f,  0.659f, 0.353f, 0.235f,
+		-0.5f,  0.5f,  0.5f,  0.659f, 0.353f, 0.235f,
+
+		-0.5f, -0.5f, -0.5f, 0.659f, 0.353f, 0.235f,
+		0.5f, -0.5f, -0.5f,  0.659f, 0.353f, 0.235f,
+		0.5f, -0.5f,  0.5f,  0.659f, 0.353f, 0.235f,
+		0.5f, -0.5f,  0.5f,  0.659f, 0.353f, 0.235f,
+		-0.5f, -0.5f,  0.5f, 0.659f, 0.353f, 0.235f,
+		-0.5f, -0.5f, -0.5f, 0.659f, 0.353f, 0.235f,
+
+		-0.5f,  0.5f, -0.5f, 0.659f, 0.353f, 0.235f,
+		0.5f,  0.5f, -0.5f,  0.659f, 0.353f, 0.235f,
+		0.5f,  0.5f,  0.5f,  0.659f, 0.353f, 0.235f,
+		0.5f,  0.5f,  0.5f,  0.659f, 0.353f, 0.235f,
+		-0.5f,  0.5f,  0.5f, 0.659f, 0.353f, 0.235f,
+		-0.5f,  0.5f, -0.5f, 0.659f, 0.353f, 0.235f,
+		};
 
 
+	GLuint VAOs[4], VBOs[4]; //lo usaremos asi para indicar que vertex utilizar
 
-	GLuint VBO, VAO;
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
+	glGenVertexArrays(4, VAOs);
+	glGenBuffers(4, VBOs);
 	//glGenBuffers(1, &EBO);
 
 	// Enlazar  Vertex Array Object
-	glBindVertexArray(VAO);
-
+	glBindVertexArray(VAOs[0]);
 	//2.- Copiamos nuestros arreglo de vertices en un buffer de vertices para que OpenGL lo use
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	// 3.Copiamos nuestro arreglo de indices en  un elemento del buffer para que OpenGL lo use
 	/*glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);*/
 
 	// 4. Despues colocamos las caracteristicas de los vertices
-
 	//Posicion
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid *)0);
 	glEnableVertexAttribArray(0);
@@ -156,6 +285,36 @@ int main() {
 	//Color
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid *)(3 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(1);
+
+	//repetimos para cada color y guardamos en los buffer|
+	glBindVertexArray(VAOs[1]);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[1]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(verticesojosnegros), verticesojosnegros, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
+
+	//color de panza beige claro
+	glBindVertexArray(VAOs[2]);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[2]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(verticesbeigeclaro), verticesbeigeclaro, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
+
+	//color de boca rosita
+	glBindVertexArray(VAOs[3]);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[3]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(verticesrositaboca), verticesrositaboca, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
+	
+
+
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -199,7 +358,7 @@ int main() {
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 	
 
-		glBindVertexArray(VAO);
+		glBindVertexArray(VAOs[0]); //usaremos el primer arreglo de vertices para el cuerpo, cabeza, orejas, cola y brazos
 
 
 		//OREJA IZQUIERDA
@@ -322,14 +481,140 @@ int main() {
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		
+		//CABEZA CRIA
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		model = glm::translate(model, glm::vec3(0.0f, 2.0f, 1.5f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//OREJA IZQUIERDA CRIA
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.05f, 0.1f, 0.05f));
+		model = glm::translate(model, glm::vec3(-1.5f, 8.0f, 9.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//OREJA DERECHA CRIA
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.05f, 0.1f, 0.05f));
+		model = glm::translate(model, glm::vec3(1.5f, 8.0f, 9.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//CAMBIAMOS AL COLOR BEIGE
+		glBindVertexArray(VAOs[2]);
+
+		//TROMPA MAMA
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.25f, 0.2f, 0.3f)); // trompa madre
+		model = glm::translate(model, glm::vec3(0.0f, 7.5f, 1.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//TROMPA CRIA
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.15f, 0.1f, 0.2f)); // trompa madre
+		model = glm::translate(model, glm::vec3(0.0f, 5.75f, 3.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//PANZA MAMA
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.8f, 1.0f, 0.1f));
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 8.5f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//BOLSA MAMA
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.8, 0.01f, 0.6f));
+		model = glm::translate(model, glm::vec3(0.0f, 50.0f, 0.9f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//PECHERA MAMA
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.7f, 0.9f, 0.1f));
+		model = glm::translate(model, glm::vec3(0.0f, 1.0f, 3.5f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//CARA MAMA
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.05f)); // escalado de la cabeza de la mama
+		model = glm::translate(model, glm::vec3(0.0f, 3.5f, 4.2f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//CAMBIAMOS COLOR A ROSITA PARA LA BOCA
+		glBindVertexArray(VAOs[3]);
+
+		//BOQUITA CRIA
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.08f, 0.04f, 0.02f)); 
+		model = glm::translate(model, glm::vec3(0.0f, 13.6f, 35.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//BOCA MADRE
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.15f, 0.1f, 0.02f));
+		model = glm::translate(model, glm::vec3(0.0f, 14.5f, 22.9f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//CAMBIAMOS AL COLOR NEGRO OJOS Y NARICES
+		glBindVertexArray(VAOs[1]);
+
+		//OJO IZQUIERDO MADRE
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.02f)); 
+		model = glm::translate(model, glm::vec3(-1.2f, 17.5f, 10.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//OJO DERECHO MADRE
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.02f));
+		model = glm::translate(model, glm::vec3(1.2f, 17.5f, 10.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//NARIZ MADRE
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.07f, 0.05f, 0.02f));
+		model = glm::translate(model, glm::vec3(0.0f, 31.5f, 22.9f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//OJO IZQUIERDO CRIA
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.05f, 0.05f, 0.02f));
+		model = glm::translate(model, glm::vec3(-1.3f, 13.4f, 30.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//OJO DERECHO CRIA
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.05f, 0.05f, 0.02f));
+		model = glm::translate(model, glm::vec3(1.3f, 13.4f, 30.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//NARIZ CRIA
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.02f, 0.01f, 0.02f));
+		model = glm::translate(model, glm::vec3(0.0f, 60.0f, 35.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		// Swap the screen buffers
 		glfwSwapBuffers(window);
-	
+		//glBindVertexArray(0); // desvinculamos al final del frame
 	}
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
+	glDeleteVertexArrays(1, VAOs);
+	glDeleteBuffers(1, VBOs);
 
 
 	glfwTerminate();
@@ -351,14 +636,14 @@ int main() {
 		 movY += 0.08f;
 	 if (glfwGetKey(window, GLFW_KEY_PAGE_DOWN) == GLFW_PRESS)
 		 movY -= 0.08f;
-	 if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		 movZ -= 0.08f;
 	 if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		 movZ -= 0.08f;
+	 if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		 movZ += 0.08f;
-	 if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-		 rot += 0.4f;
 	 if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-		 rot -= 0.4f;
+		 rot += 0.9f;
+	 if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+		 rot -= 0.9f;
  }
 
 
