@@ -14,13 +14,13 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Resource Files\Shader">
-      <UniqueIdentifier>{985aa4ae-ddcd-40fb-a588-fd63755bcba3}</UniqueIdentifier>
+      <UniqueIdentifier>{eb05faa0-d2ee-44f1-b84f-cf7ebe5034af}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="Modelado_Jerarquico.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\core.frag">
@@ -31,8 +31,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Modelado_Jerarquico.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

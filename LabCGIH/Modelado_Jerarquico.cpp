@@ -1,7 +1,7 @@
 //Eric Ramírez Valdovinos
 //423095203
-//Previo 5: Modelado Jerárquico
-//Fecha de entrega: 03/03/2026
+//Práctica 5: Modelado Jerárquico (Garra mecánica)
+//Fecha de entrega: 08/03/2026
 
 #include<iostream>
 #include <GL/glew.h>
@@ -42,7 +42,7 @@ int main() {
 
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Previo 5: Modelado jerarquico - Eric Ramirez", nullptr, nullptr);
+	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Práctica 5: Modelado jerarquico (Garra mecánica) - Eric Ramirez", nullptr, nullptr);
 
 	int screenWidth, screenHeight;
 
@@ -206,10 +206,10 @@ int main() {
 
 		glBindVertexArray(VAO);
 		
-		//Modelo biceps
+		//Modelo bicep
 		model = glm::rotate(model, glm::radians(hombro), glm::vec3(0.0f, 0.0, 1.0f)); //aplicamos la rotación del hombro
-		modelTemp = model = glm::translate(model, glm::vec3(1.5f, 0.0f, 0.0f)); //matriz auxiliar para el brazo que tiene una traslación respecto al hombro
-		model = glm::scale(model, glm::vec3(3.0f, 1.0f, 1.0f)); //escalamos el cubo para formar el brazo
+		modelTemp = model = glm::translate(model, glm::vec3(0.0f, 1.5f, 0.0f)); //matriz auxiliar para el brazo que tiene una traslación respecto al hombro
+		model = glm::scale(model, glm::vec3(1.0f, 3.0f, 1.0f)); //escalamos el cubo para formar el brazo
 		color = glm::vec3(0.302f, 0.031f, 0.067f); //color del brazo
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color)); //actualizamos el color del shader
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model)); //enviamos la matriz de modelo al shader
@@ -217,40 +217,40 @@ int main() {
 
 
 		//Modelo antebrazo
-		model = glm::translate(modelTemp, glm::vec3(1.5f, 0.0f, 0.0f)); //matriz auxiliar para el antebrazo que tiene una traslación respecto al brazo
+		model = glm::translate(modelTemp, glm::vec3(0.0f, -1.5f, 0.0f)); //matriz auxiliar para el antebrazo que tiene una traslación respecto al brazo
 		model = glm::rotate(model, glm::radians(codo), glm::vec3(0.0f, 0.0, 1.0f)); //aplicamos la rotación del codo
-		modelTemp = model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f)); //matriz auxiliar para el antebrazo que tiene una traslación respecto al codo
-		model = glm::scale(model, glm::vec3(2.0f, 1.0f, 1.0f)); //escalamos el cubo para formar el antebrazo
+		modelTemp = model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f)); //matriz auxiliar para el antebrazo que tiene una traslación respecto al codo
+		model = glm::scale(model, glm::vec3(1.0f, 2.0f, 1.0f)); //escalamos el cubo para formar el antebrazo
 		color = glm::vec3(0.310f, 0.102f, 0.392f); //color del antebrazo
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36); 
 
 		//Modelo mano
-		model = glm::translate(modelTemp, glm::vec3(0.7f, 0.0f, 0.0f)); //matriz auxiliar para la mano que tiene una traslación respecto al antebrazo
+		model = glm::translate(modelTemp, glm::vec3(0.0f, -0.7f, 0.0f)); //matriz auxiliar para la mano que tiene una traslación respecto al antebrazo
 		model = glm::rotate(model, glm::radians(muneca), glm::vec3(0.0f, 0.0, 1.0f)); //aplicamos la rotación del codo para que la mano gire con el antebrazo
-		modelTemp2 = modelTemp = model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f)); //matriz auxiliar para la mano que tiene una traslación respecto al codo
-		model = glm::scale(model, glm::vec3(0.5f, 1.0f, 1.0f)); //escalamos el cubo para formar la mano
+		modelTemp2 = modelTemp = model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f)); //matriz auxiliar para la mano que tiene una traslación respecto al codo
+		model = glm::scale(model, glm::vec3(1.0f, 0.5f, 1.0f)); //escalamos el cubo para formar la mano
 		color = glm::vec3(1.000f, 0.008f, 0.145f); //color de la mano
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		//modelo dedo1a
-		model = glm::translate(modelTemp, glm::vec3(0.35f, 0.31f, 0.375f)); //matriz auxiliar para el dedo1 que tiene una traslación respecto a la mano
+		model = glm::translate(modelTemp, glm::vec3(0.31f, -0.35f, 0.375f)); //matriz auxiliar para el dedo1 que tiene una traslación respecto a la mano
 		model = glm::rotate(model, glm::radians(dedo1), glm::vec3(0.0f, 0.0, 1.0f)); //aplicamos la rotación del dedo1 para que gire con la mano
-		modelTemp = model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f)); //matriz auxiliar para el dedo1 que tiene una traslación respecto a la mano
-		model = glm::scale(model, glm::vec3(1.2f, 0.3f, 0.25f)); //escalamos el cubo para formar el dedo1
+		modelTemp = model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f)); //matriz auxiliar para el dedo1 que tiene una traslación respecto a la mano
+		model = glm::scale(model, glm::vec3(0.3f, 1.2f, 0.25f)); //escalamos el cubo para formar el dedo1
 		color = glm::vec3(0.000f, 0.000f, 0.000f); //color del dedo1
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		
 		// modelo dedo1b
-		model = glm::translate(modelTemp, glm::vec3(0.55f, 0.0f, 0.0f)); //matriz auxiliar para el dedo1 que tiene una traslación respecto a la mano
+		model = glm::translate(modelTemp, glm::vec3(0.0f, -0.55f, 0.0f)); //matriz auxiliar para el dedo1 que tiene una traslación respecto a la mano
 		model = glm::rotate(model, glm::radians(dedo2), glm::vec3(0.0f, 0.0, 1.0f)); //aplicamos la rotación del dedo1 para que gire con la mano
-		model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f)); //matriz auxiliar para el dedo1 que tiene una traslación respecto a la mano
-		model = glm::scale(model, glm::vec3(1.0f, 0.3f, 0.25f)); //escalamos el cubo para formar el dedo1
+		model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f)); //matriz auxiliar para el dedo1 que tiene una traslación respecto a la mano
+		model = glm::scale(model, glm::vec3(0.3f, 1.0f, 0.25f)); //escalamos el cubo para formar el dedo1
 		color = glm::vec3(0.000f, 1.000f, 0.000f); //color del dedo1
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
