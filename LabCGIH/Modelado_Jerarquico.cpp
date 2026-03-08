@@ -28,7 +28,11 @@ rot = 0.0f;
 //For model
 float hombro = 0.0f,
 codo = 0.0f, muneca = 0.0f,
-dedo1 = 0.0f, dedo2 = 0.0f;
+dedo1a = 0.0f, dedo1b = 0.0f, dedo1c = 0.0f,
+dedo2a = 0.0f, dedo2b = 0.0f, dedo2c = 0.0f,
+dedo3a = 0.0f, dedo3b = 0.0f, dedo3c = 0.0f,
+dedo4a = 0.0f, dedo4b = 0.0f, dedo4c = 0.0f,
+dedo5a = 0.0f, dedo5b = 0.0f, dedo5c = 0.0f;
 
 
 int main() {
@@ -42,7 +46,7 @@ int main() {
 
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Práctica 5: Modelado jerarquico (Garra mecánica) - Eric Ramirez", nullptr, nullptr);
+	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Practica 5: Modelado jerarquico (Garra mecanica) - Eric Ramirez", nullptr, nullptr);
 
 	int screenWidth, screenHeight;
 
@@ -236,11 +240,13 @@ int main() {
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
+
+		// PINZA 1
 		//modelo dedo1a
 		model = glm::translate(modelTemp, glm::vec3(0.31f, -0.35f, 0.375f)); //matriz auxiliar para el dedo1 que tiene una traslación respecto a la mano
-		model = glm::rotate(model, glm::radians(dedo1), glm::vec3(0.0f, 0.0, 1.0f)); //aplicamos la rotación del dedo1 para que gire con la mano
+		model = glm::rotate(model, glm::radians(dedo1a), glm::vec3(-1.0f, 0.0, 1.0f)); //aplicamos la rotación del dedo1 para que gire con la mano
 		modelTemp = model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f)); //matriz auxiliar para el dedo1 que tiene una traslación respecto a la mano
-		model = glm::scale(model, glm::vec3(0.3f, 1.2f, 0.25f)); //escalamos el cubo para formar el dedo1
+		model = glm::scale(model, glm::vec3(0.2f, 1.2f, 0.2f)); //escalamos el cubo para formar el dedo1
 		color = glm::vec3(0.000f, 0.000f, 0.000f); //color del dedo1
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -248,14 +254,23 @@ int main() {
 		
 		// modelo dedo1b
 		model = glm::translate(modelTemp, glm::vec3(0.0f, -0.55f, 0.0f)); //matriz auxiliar para el dedo1 que tiene una traslación respecto a la mano
-		model = glm::rotate(model, glm::radians(dedo2), glm::vec3(0.0f, 0.0, 1.0f)); //aplicamos la rotación del dedo1 para que gire con la mano
-		model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f)); //matriz auxiliar para el dedo1 que tiene una traslación respecto a la mano
-		model = glm::scale(model, glm::vec3(0.3f, 1.0f, 0.25f)); //escalamos el cubo para formar el dedo1
+		model = glm::rotate(model, glm::radians(dedo1b), glm::vec3(-1.0f, 0.0, 1.0f)); //aplicamos la rotación del dedo1 para que gire con la mano
+		modelTemp = model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f)); //matriz auxiliar para el dedo1 que tiene una traslación respecto a la mano
+		model = glm::scale(model, glm::vec3(0.2f, 1.0f, 0.2f)); //escalamos el cubo para formar el dedo1
 		color = glm::vec3(0.000f, 1.000f, 0.000f); //color del dedo1
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
+		//modelo dedo1c
+		model = glm::translate(modelTemp, glm::vec3(0.0f, -0.35f, 0.0f)); //matriz auxiliar para el dedo1 que tiene una traslación respecto a la mano
+		model = glm::rotate(model, glm::radians(dedo1c), glm::vec3(-1.0f, 0.0, 1.0f)); //aplicamos la rotación del dedo1 para que gire con la mano
+		model = glm::translate(model, glm::vec3(0.0f, -0.45f, 0.0f)); //matriz auxiliar para el dedo1 que tiene una traslación respecto a la mano
+		model = glm::scale(model, glm::vec3(0.2f, 0.6f, 0.2f)); //escalamos el cubo para formar el dedo1
+		color = glm::vec3(0.984f, 0.737f, 0.016f); //color del dedo
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glBindVertexArray(0);//limpia configuración de VAO
 		// Swap the screen buffers
@@ -278,9 +293,9 @@ int main() {
 	 if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		 movX -= 0.1f;
 	 if (glfwGetKey(window,GLFW_KEY_UP) == GLFW_PRESS)
-		 movY += 0.08f;
-	 if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 		 movY -= 0.08f;
+	 if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		 movY += 0.08f;
 	 if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 		 movZ -= 0.08f;
 	 if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
@@ -302,13 +317,22 @@ int main() {
 	 if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS)
 		 muneca -= 0.20f;
 	 if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
-		 dedo1 += 0.20f;
+	 {
+		 dedo1a += 0.3f; dedo1b -= 0.3f; dedo1c -= 0.10f;
+		 dedo2a += 0.3f; dedo2b -= 0.3f; dedo2c -= 0.10f;
+		 dedo3a += 0.3f; dedo3b -= 0.3f; dedo3c -= 0.10f;
+		 dedo4a += 0.3f; dedo4b -= 0.3f; dedo4c -= 0.10f;
+		 dedo5a += 0.3f; dedo5b -= 0.3f; dedo5c -= 0.10f;
+	 }
+
 	 if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
-		 dedo1 -= 0.20f;
-	 if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS)
-		 dedo2 += 0.20f;
-	 if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS)
-		 dedo2 -= 0.20f;
+	 {
+		 dedo1a -= 0.3f; dedo1b += 0.3f; dedo1c += 0.10f;
+		 dedo2a -= 0.3f; dedo2b += 0.3f; dedo2c += 0.10f;
+		 dedo3a -= 0.3f; dedo3b += 0.3f; dedo3c += 0.10f;
+		 dedo4a -= 0.3f; dedo4b += 0.3f; dedo4c += 0.10f;
+		 dedo5a -= 0.3f; dedo5b += 0.3f; dedo5c += 0.10f;
+	 }
  }
 
 
