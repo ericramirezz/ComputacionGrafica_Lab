@@ -452,7 +452,6 @@ int main() {
 		 dedo3a += 0.3f; dedo3b -= 0.3f; dedo3c -= 0.18f;
 		 dedo4a += 0.3f; dedo4b -= 0.3f; dedo4c -= 0.18f;
 		 dedo5a += 0.3f; dedo5b -= 0.3f; dedo5c -= 0.18f;
-
 		 if (dedo1a > 90.0f or dedo1b < -90.0f or dedo1c < -54.0f) {// hacemos esto para truncar el movimiento de los dedos para que no se sobrepasen su posición inicial de retracción
 			dedo1a = 90.0f, dedo1b = -90.0f, dedo1c = -54.0f,
 			dedo2a = 90.0f, dedo2b = -90.0f, dedo2c = -54.0f,
