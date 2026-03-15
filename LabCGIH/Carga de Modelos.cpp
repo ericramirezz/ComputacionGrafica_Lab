@@ -1,7 +1,7 @@
 //Eric Ramírez Valdovinos
 // 423095203
 // Previo 6: Carga de modelos
-// Fecha de entrega: 10/03/2026
+// Fecha de entrega: 15/03/2026
 // Std. Includes
 #include <string>
 
@@ -58,7 +58,7 @@ int main( )
     glfwWindowHint( GLFW_RESIZABLE, GL_FALSE );
     
     // Create a GLFWwindow object that we can use for GLFW's functions
-    GLFWwindow *window = glfwCreateWindow( WIDTH, HEIGHT, "Previo 6: Carga de modelos y camara sintetica - Eric Ramirez", nullptr, nullptr );
+    GLFWwindow *window = glfwCreateWindow( WIDTH, HEIGHT, "Practica 6: Carga de modelos (Perro y gallo) - Eric Ramirez", nullptr, nullptr );
     
     if ( nullptr == window )
     {
@@ -101,7 +101,8 @@ int main( )
     //Model dog((char*)"Models/RedDog.obj"); //carga de arhcivo del modelo de perro en la carpeta del proyecto
     //glm::mat4 projection = glm::perspective( camera.GetZoom( ), ( float )SCREEN_WIDTH/( float )SCREEN_HEIGHT, 0.1f, 100.0f );
     
-    Model taxi_new_york((char*)"Models/suv-luxury.obj"); //carga de arhcivo del modelo del carro en la carpeta del proyecto
+    Model malla((char*)"Models/malla.obj"); 
+    Model gallo((char*)"Models/pollos.obj");
     glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
   
 
@@ -130,13 +131,17 @@ int main( )
         // Draw the loaded model
         glm::mat4 model(1);
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        taxi_new_york.Draw(shader);
+        malla.Draw(shader);
 
-
+        //model = glm::translate(model, glm::vec3(3.0f, 0.0f, 0.0f)); // Trasladamos el modelo a la derecha
+        //model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f)); // Escalamos el modelo al doble de su tamaño original
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        gallo.Draw(shader);
+        // Swap the buffers
 
         //Segundo perro con transfromaciones
 		//model = glm::translate(model, glm::vec3(3.0f, 0.0f, 0.0f)); // Trasladamos el modelo a la derecha
-		//odel = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f)); // Escalamos el modelo al doble de su tamaño original
+		//model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f)); // Escalamos el modelo al doble de su tamaño original
 		//glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
 		//dog.Draw(shader);
         // Swap the buffers
