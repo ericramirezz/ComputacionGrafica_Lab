@@ -103,6 +103,11 @@ int main( )
     
     Model malla((char*)"Models/malla.obj"); 
     Model gallo((char*)"Models/pollos.obj");
+    Model pasto((char*)"Models/pasto.obj");
+    Model tierra((char*)"Models/tierra.obj");
+    Model perro_naranja((char*)"Models/RedDog.obj");
+    Model arbol((char*)"Models/arbol.obj");
+    Model perro_blanco((char*)"Models/perro_blanco.obj");
     glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
   
 
@@ -137,6 +142,21 @@ int main( )
         //model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f)); // Escalamos el modelo al doble de su tamaño original
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         gallo.Draw(shader);
+
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        pasto.Draw(shader);
+
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        tierra.Draw(shader);
+
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        arbol.Draw(shader);
+
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        perro_blanco.Draw(shader);
+
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        perro_naranja.Draw(shader);
         // Swap the buffers
 
         //Segundo perro con transfromaciones
