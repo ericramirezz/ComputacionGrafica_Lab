@@ -158,13 +158,13 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 	// Diffuse map
-	image = stbi_load("images/window.png", &textureWidth, &textureHeight, &nrChannels, 0); //cargamos la imagen de la textura
+	image = stbi_load("images/nube_rayos.png", &textureWidth, &textureHeight, &nrChannels, 0); //cargamos la imagen de la textura
 	glBindTexture(GL_TEXTURE_2D, texture1); //enlazamos el identificador con el tipo de textura que queremos cargar, en este caso 2D
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image); //colocamos el tamaño de la imagen, el formato de la imagen y el tipo de dato de la imagen
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image); //colocamos el tamaño de la imagen, el formato de la imagen y el tipo de dato de la imagen
 	glGenerateMipmap(GL_TEXTURE_2D); //generamos los mipmaps para la textura
 	if (image)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);//colocamos el tamaño de la imagen, el formato de la imagen y el tipo de dato de la imagen
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);//colocamos el tamaño de la imagen, el formato de la imagen y el tipo de dato de la imagen
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
