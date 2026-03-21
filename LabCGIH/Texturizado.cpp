@@ -105,54 +105,65 @@ int main()
 		// Set up vertex data (and buffer(s)) and attribute pointers
 	GLfloat vertices[] =
 	{
-		// Posiciones            // Colores           // Coordenadas UV
-		// Cara Frontal (Z+)
-		-0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 0.0f, // Inferior Izquierda
-		 0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.5f, 0.0f, // Inferior Derecha
-		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.5f, 1.0f, // Superior Derecha
-		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.5f, 1.0f, // Superior Derecha
-		-0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 1.0f, // Superior Izquierda
-		-0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 0.0f, // Inferior Izquierda
+		// Posiciones             // Colores            // Coordenadas UV (Mapeo de Dado)
 
-		// Cara Trasera (Z-)
-		-0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 0.0f,
-		 0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   1.0f, 0.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   1.0f, 1.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   1.0f, 1.0f,
-		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 0.0f,
+		// Cara Frontal (Z+) ---> Mapea al número 2 (Centro arriba de la textura)
+		// UV X: 0.333 a 0.666 | UV Y: 0.50 a 0.75
+		//mitad  inferior derecha 
+		-0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.39f, 0.58f, // Inferior Izquierda
+		 0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.61f, 0.58f, // Inferior Derecha
+		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.61f, 0.89f, // Superior Derecha
+		 //mitad superior izquierda
+		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.61f, 0.89f, // Superior Derecha
+		-0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.39f, 0.89f, // Superior Izquierda
+		-0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.39f, 0.58f, // Inferior Izquierda
 
-		// Cara Izquierda (X-)
-		-0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   1.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   1.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 0.0f,
-		-0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   1.0f, 0.0f,
+		// Cara Trasera (Z-) ---> Mapea al número 5 (centro abajo de la textura)
+		// UV X: 0.333 a 0.666 | UV Y: 0.00 a 0.25
+		//mitad inferior derecha
+		-0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.61f, 0.125f, //inferior izquierda
+		 0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.39f, 0.125f, //inferior derecha
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.39f, 0.445f, //superior derecha
+		 //mitad superior izquierda
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.39f, 0.445f, //superior derecha
+		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.61f, 0.445f, //superior izquierda
+		-0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.61f, 0.125f, //inferior izquierda
 
-		// Cara Derecha (X+)
-		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   1.0f, 0.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   1.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 1.0f,
-		 0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   1.0f, 0.0f,
+		// Cara Izquierda (X-) ---> Mapea al número 1 (arriba izquierda textura)
+		// UV X: 0.000 a 0.333 | UV Y: 0.50 a 0.75
+		-0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.28f, 0.89f, 
+		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.07f, 0.89f, 
+		-0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.07f, 0.58f, 
+		-0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.07f, 0.58f, 
+		-0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.28f, 0.58f, 
+		-0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.28f, 0.89f, 
 
-		 // Cara Inferior (Y-)
-		 -0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 1.0f,
-		  0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   1.0f, 1.0f,
-		  0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   1.0f, 0.0f,
-		  0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   1.0f, 0.0f,
-		 -0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 0.0f,
-		 -0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 1.0f,
+		// Cara Derecha (X+) ---> Mapea al número 6 (abajo izquierda de la textura)
+		// UV X: 0.666 a 1.000 | UV Y: 0.50 a 0.75
+		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.28f, 0.125f, 
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.07f, 0.125f, 
+		 0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.07f, 0.445f, 
+		 0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.07f, 0.445f, 
+		 0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.28f, 0.445f, 
+		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.28f, 0.125f, 
 
-		 // Cara Superior (Y+)
-		 -0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 1.0f,
-		  0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   1.0f, 1.0f,
-		  0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   1.0f, 0.0f,
-		  0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   1.0f, 0.0f,
-		 -0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 0.0f,
-		 -0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.0f, 1.0f
+		 // Cara Inferior (Y-) ---> Mapea al número 4 (abajo derecha de la textura)
+		 // UV X: 0.333 a 0.666 | UV Y: 0.25 a 0.50
+		 -0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.715f, 0.125f,
+		  0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.935f, 0.125f,
+		  0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.935f, 0.445f,
+		  0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.935f, 0.445f,
+		 -0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.715f, 0.445f,
+		 -0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.715f, 0.125f,
+
+		 // Cara Superior (Y+) ---> Mapea al número 3 (arriba derecha textura)
+		 // UV X: 0.333 a 0.666 | UV Y: 0.75 a 1.00
+		 -0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.715f, 0.58f, 
+		  0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.935f, 0.58f, 
+		  0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.935f, 0.89f, 
+		  0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.935f, 0.89f, 
+		 -0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1.0f,   0.715f, 0.89f, 
+		 -0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,   0.715f, 0.58f
 	};
 
 	GLuint indices[] =
