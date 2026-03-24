@@ -42,8 +42,9 @@ bool firstMouse = true;
 
 
 // Light attributes
-glm::vec3 lightPos(0.5f, 0.5f, 2.5f); // Posición de la luz
+glm::vec3 lightPos(0.5f, 6.0f, 0.0f); // Posición de la luz
 float movelightPos = 0.0f; // Variable para mover la luz
+float movelightPos2 = 0.0f; // Variable para mover segunda luz
 GLfloat deltaTime = 0.0f; // Tiempo entre frames
 GLfloat lastFrame = 0.0f; // Tiempo del último frame
 float rot = 0.0f; // Variable para la rotación del modelo
@@ -210,70 +211,82 @@ int main()
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        // ==========================================
+        // 1. DIBUJAR EL MODELO CON ILUMINACIÓN
+        // ==========================================
+        lightingShader.Use();
 
-        lightingShader.Use(); // Usamos el shader de iluminación para renderizar el modelo
-        GLint lightPosLoc = glGetUniformLocation(lightingShader.Program, "light.position"); // Obtenemos la ubicación de la variable uniforme para la posición de la luz
-        GLint viewPosLoc = glGetUniformLocation(lightingShader.Program, "viewPos"); // Obtenemos la ubicación de la variable uniforme para la posición de la cámara
-        glUniform3f(lightPosLoc, lightPos.x + movelightPos, lightPos.y + movelightPos, lightPos.z + movelightPos); // Actualizamos la posición de la luz con el movimiento
-        glUniform3f(viewPosLoc, camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z); // Actualizamos la posición de la cámara
+        // --- CÁMARA ---
+        GLint viewPosLoc = glGetUniformLocation(lightingShader.Program, "viewPos");
+        glUniform3f(viewPosLoc, camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z);
 
+        // --- LUZ 0  ---
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "lights[0].position"), lightPos.x + movelightPos, lightPos.y + movelightPos, lightPos.z + movelightPos);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "lights[0].ambient"), 0.3f, 0.3f, 0.3f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "lights[0].diffuse"), 0.3f, 0.3f, 0.3f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "lights[0].specular"), 0.6f, 0.6f, 0.6f);
 
-        // Set lights properties
-        glUniform3f(glGetUniformLocation(lightingShader.Program, "light.ambient"), 0.9f, 0.9f, 0.6f);
-        glUniform3f(glGetUniformLocation(lightingShader.Program, "light.diffuse"), 0.7f, 0.5f, 0.3f);
-        glUniform3f(glGetUniformLocation(lightingShader.Program, "light.specular"), 0.6f, 0.6f, 0.6f);
+        // --- LUZ 1  ---
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "lights[1].position"), lightPos.x + movelightPos2, lightPos.y + movelightPos2, lightPos.z);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "lights[1].ambient"), 0.5f, 0.5f, 0.5f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "lights[1].diffuse"), 0.8f, 0.8f, 0.8f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "lights[1].specular"), 1.0f, 1.0f, 1.0f);
 
+        // --- MATRICES DE VISTA Y PROYECCIÓN ---
         glm::mat4 view = camera.GetViewMatrix();
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 
-        // Set material properties
+        // --- PROPIEDADES DEL MATERIAL ---
         glUniform3f(glGetUniformLocation(lightingShader.Program, "material.ambient"), 0.5f, 0.5f, 0.5f);
         glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 0.8f, 0.8f, 0.0f);
         glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 1.0f, 1.0f, 1.0f);
         glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 0.8f);
 
-
-        // Draw the loaded model
+        // --- DIBUJAR EL PERRO ---
         glm::mat4 model(1);
         model = glm::scale(model, glm::vec3(3.0f, 3.0f, 3.0f));
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        glBindVertexArray(VAO);
 
+        // Cargar textura manualmente
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture);
         glUniform1i(glGetUniformLocation(lightingShader.Program, "texture_diffusse"), 0);
 
         red_dog.Draw(lightingShader);
-     
-        //glDrawArrays(GL_TRIANGLES, 0, 36);
-        
-
-        glBindVertexArray(0);
 
 
-
-
+        // ==========================================
+        // 2. DIBUJAR LOS CUBOS QUE REPRESENTAN LA LUZ
+        // ==========================================
         lampshader.Use();
         glUniformMatrix4fv(glGetUniformLocation(lampshader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
         glUniformMatrix4fv(glGetUniformLocation(lampshader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+
+        glBindVertexArray(VAO); // Vinculamos el VAO del cubo
+
+        // --- CUBO 0 ---
         model = glm::mat4(1.0f);
-        model = glm::translate(model, lightPos + movelightPos);
+        // Usamos la misma posición exacta que le pasamos a "lights[0].position" arriba
+        model = glm::translate(model, glm::vec3(lightPos.x + movelightPos, lightPos.y + movelightPos, lightPos.z + movelightPos));
         model = glm::scale(model, glm::vec3(0.3f));
         glUniformMatrix4fv(glGetUniformLocation(lampshader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
-        glBindVertexArray(0);
+
+        // --- CUBO 1 ---
+        model = glm::mat4(1.0f);
+        // Usamos la misma posición exacta que le pasamos a "lights[1].position" arriba
+        model = glm::translate(model, glm::vec3(lightPos.x + movelightPos2, lightPos.y + movelightPos2, lightPos.z)); // no se va a mover en Z
+        model = glm::scale(model, glm::vec3(0.3f));
+        glUniformMatrix4fv(glGetUniformLocation(lampshader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+
+        glBindVertexArray(0); // Desvinculamos
 
         // Swap the buffers
         glfwSwapBuffers(window);
+
     }
-
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-
-    glfwTerminate();
-    return 0;
 }
 
 
@@ -339,6 +352,18 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
     {
         
         movelightPos -= 0.1f;
+    }
+
+    if (keys[GLFW_KEY_I])
+    {
+
+        movelightPos2 += 0.1f;
+    }
+
+    if (keys[GLFW_KEY_K])
+    {
+
+        movelightPos2 -= 0.1f;
     }
 
 
