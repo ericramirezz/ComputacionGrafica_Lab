@@ -25,7 +25,6 @@ out vec4 color;
 uniform vec3 viewPos;
 uniform Material material;
 
-// El arreglo de luces debe ir AQUÍ, DESPUÉS de que definimos qué es un "Light"
 uniform Light lights[2]; 
 
 uniform sampler2D texture_diffusse;
