@@ -1,0 +1,18 @@
+# Blender 5.1.0 MTL File: 'uploads_files_6919731_Ball.blend'
+# www.blender.org
+
+newmtl m_ball
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.950000
+illum 9
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd ball_basecolor.png
+map_Pm ball_metalness.png
+map_Pr ball_roughness.png
+map_Bump -bm 1.000000 ball_normal.png
