@@ -2,6 +2,10 @@
 // 423095203
 // Previo 9: Fuentes de luz
 // Fecha de entrega: 07 de abril de 2026
+https://www.cgtrader.com/free-3d-models/various/various-models/wood-boxing-ring
+https://www.cgtrader.com/free-3d-models/character/man/general-ketheric-thorm-blender-version-4-4-1
+https://www.cgtrader.com/free-3d-models/character/fantasy-character/sonic-the-hedgehog-c2a0d0e2-12b4-4705-9a9b-3d0ae290134c
+https://www.cgtrader.com/free-3d-models/furniture/lamp/modern-minimal-pendant-lamp-scandinavian-ceiling-light
 #include <iostream>
 #include <cmath>
 
