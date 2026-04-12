@@ -1,0 +1,129 @@
+# Blender 5.1.0 MTL File: 'woodboxing_ring.blend'
+# www.blender.org
+
+newmtl BlackSuit.001
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 3
+Pm 1.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd C:/BlackSuit_BaseColor.<UDIM>.png
+map_Pr C:/BlackSuit_Roughness.<UDIM>.png
+map_Bump -bm 1.000000 C:/BlackSuit_Normal.<UDIM>.png
+
+newmtl Frames.002
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 3
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd C:/Frames_BaseColor.png
+map_Pm C:/Frames_Metallic.png
+map_Pr C:/Frames_Roughness.png
+map_Bump -bm 1.000000 C:/Frames_Normal.png
+
+newmtl Glass.002
+Kd 0.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 0.500000
+illum 9
+Pr 0.000000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+
+newmtl Lens.002
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 3
+Pm 0.715789
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd Lens_BaseColor.png
+map_Pr Lens_Roughness.png
+map_Bump -bm 1.000000 Lens_Normal.png
+
+newmtl Logos
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 3
+Pm 0.772804
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd Logos_BaseColor.png
+map_Pr Logos_Roughness.png
+map_Bump -bm 1.000000 Logos_Normal.png
+
+newmtl Soles.002
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd Soles_BaseColor.png
+map_Pr Soles_Roughness.png
+map_Bump -bm 1.000000 Soles_Normal.png
+
+newmtl Web.001
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 3
+Pm 0.646643
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd Web_BaseColor.png
+map_Pr Web_Roughness.png
+map_Bump -bm 1.000000 Web_Normal.png
+
+newmtl WebBlack.001
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 3
+Pm 1.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd WebBlack_BaseColor.png
+map_Pr WebBlack_Roughness.png
+map_Bump -bm 1.000000 WebBlack_Normal.png

@@ -1,11 +1,8 @@
 // Eric Ramirez Valdovinos
 // 423095203
-// Previo 9: Fuentes de luz
-// Fecha de entrega: 07 de abril de 2026
-https://www.cgtrader.com/free-3d-models/various/various-models/wood-boxing-ring
-https://www.cgtrader.com/free-3d-models/character/man/general-ketheric-thorm-blender-version-4-4-1
-https://www.cgtrader.com/free-3d-models/character/fantasy-character/sonic-the-hedgehog-c2a0d0e2-12b4-4705-9a9b-3d0ae290134c
-https://www.cgtrader.com/free-3d-models/furniture/lamp/modern-minimal-pendant-lamp-scandinavian-ceiling-light
+// Práctica 9: Fuentes de luz
+// Fecha de entrega: 12 de abril de 2026
+
 #include <iostream>
 #include <cmath>
 
@@ -124,7 +121,7 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);*/
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Previo 9: Fuentes de luz - Eric Ramirez", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Practica 9: Fuentes de luz - Eric Ramirez", nullptr, nullptr);
 
 	if (nullptr == window)
 	{
@@ -162,8 +159,12 @@ int main()
 	Shader lightingShader("Shader/lighting.vs", "Shader/lighting.frag");
 	Shader lampShader("Shader/lamp.vs", "Shader/lamp.frag");
 	
-	Model Dog((char*)"Models/ball.obj");// cargamos la pelota
-	Model Piso((char*)"Models/piso.obj");//agregamos un plano
+
+	Model ring((char*)"Models/woodboxing_ring.obj");//agregamos un plano
+	Model sonic((char*)"Models/sonic.obj");//sonic 1
+	Model lamparaFlotante((char*)"Models/lamparaFlotante.obj"); 
+	Model blackFighter((char*)"Models/blackmen.obj");
+
 	Model Glass((char*)"Models/Ball_vintage4.obj");// cargamos segundo modelo con transparencia
 
 
@@ -226,7 +227,7 @@ int main()
 
 		// Directional light
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.direction"), -0.2f, -1.0f, -0.3f);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.ambient"),0.1f,0.1f,0.1f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.ambient"),0.4f,0.4f,0.4f);
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.diffuse"), 0.05f, 0.05f, 0.05f);
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.specular"),0.1f, 0.05f, 0.1f);
 
@@ -314,20 +315,24 @@ int main()
         view = camera.GetViewMatrix();	
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		Piso.Draw(lightingShader);
+		ring.Draw(lightingShader);
 
 
-	
 		model = glm::mat4(1);
-		glEnable(GL_BLEND);//Avtiva la funcionalidad para trabajar el canal alfa
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform1i(glGetUniformLocation(lightingShader.Program, "transparency"), 0);
-	    Dog.Draw(lightingShader);
-		glDisable(GL_BLEND);  //Desactiva el canal alfa 
-		glBindVertexArray(0);
+		//model = glm::rotate(model, -3.0f, glm::vec3(13.0, 0.0f, 3.0f));
+		//model = glm::scale(model, glm::vec3(3.5f, 3.5f, 3.5f));
+		sonic.Draw(lightingShader);
 
-		//Nuevo modelo para el previo: gabinete
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		blackFighter.Draw(lightingShader);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		lamparaFlotante.Draw(lightingShader);
+
+		//Nuevo modelo para el previo
 		model = glm::mat4(1);
 		glEnable(GL_BLEND);//Activa la funcionalidad para trabajar el canal alfa
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

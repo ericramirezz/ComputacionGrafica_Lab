@@ -1,0 +1,32 @@
+# Blender 5.1.0 MTL File: 'woodboxing_ring.blend'
+# www.blender.org
+
+newmtl Sonic:CHE_NML_SNC_body1
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 3
+Pr 0.858579
+Pm 0.500000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd color_sonic.png
+
+newmtl Sonic:CHE_NML_SNC_eye1
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 3
+Pr 0.858579
+Pm 0.500000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd C:/Users/PC/Downloads/CHR_NML_SNC.png
