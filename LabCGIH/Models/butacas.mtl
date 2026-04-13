@@ -1,0 +1,66 @@
+# Blender 5.1.0 MTL File: 'woodboxing_ring.blend'
+# www.blender.org
+
+newmtl Metal
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd Metal_BaseColor.png
+map_Pm Metal_Metalness.png
+map_Pr Metal_Roughness.png
+map_Bump -bm 1.000000 Metal_Normal.png
+
+newmtl Metal.001
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd Metal_BaseColor.png
+map_Pm Metal_Metalness.png
+map_Pr Metal_Roughness.png
+map_Bump -bm 1.000000 Metal_Normal.png
+
+newmtl Wood
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd Wood_BaseColor.png
+map_Pm Wood_Metalness.png
+map_Pr Wood_Roughness.png
+map_Bump -bm 1.000000 Wood_Normal.png
+
+newmtl Wood.001
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd Wood_BaseColor.png
+map_Pm Wood_Metalness.png
+map_Pr Wood_Roughness.png
+map_Bump -bm 1.000000 Wood_Normal.png
