@@ -1,10 +1,10 @@
 #version 330 core
 
-#define NUM_LUCES 4
+#define NUMBER_OF_POINT_LIGHTS 1
 
 struct Material
 {
-    sampler2D diffuse; 
+    sampler2D diffuse;
     sampler2D specular;
     float shininess;
 };
@@ -55,12 +55,10 @@ out vec4 color;
 
 uniform vec3 viewPos;
 uniform DirLight dirLight;
-uniform PointLight pointLights[NUM_LUCES];
-uniform SpotLight spotLight;   // linterna de la camara
-uniform SpotLight spotLight2;  // foco de la lampara flotante sobre el ring
+uniform PointLight pointLights[NUMBER_OF_POINT_LIGHTS];
+uniform SpotLight spotLight;
 uniform Material material;
 uniform int transparency;
-uniform bool emite_luz;
 
 // Function prototypes
 vec3 CalcDirLight( DirLight light, vec3 normal, vec3 viewDir );
@@ -69,13 +67,6 @@ vec3 CalcSpotLight( SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir );
 
 void main( )
 {
-    // Si el objeto es emisivo, usa solo su textura difusa (brilla por si mismo)
-    if ( emite_luz )
-    {
-        color = texture( material.diffuse, TexCoords );
-        return;
-    }
-
     // Properties
     vec3 norm = normalize( Normal );
     vec3 viewDir = normalize( viewPos - FragPos );
@@ -84,20 +75,18 @@ void main( )
     vec3 result = CalcDirLight( dirLight, norm, viewDir );
     
     // Point lights
-    for ( int i = 0; i < NUM_LUCES; i++ )
+    for ( int i = 0; i < NUMBER_OF_POINT_LIGHTS; i++ )
     {
         result += CalcPointLight( pointLights[i], norm, FragPos, viewDir );
     }
     
-    // Spot light (linterna camara)
+    // Spot light
     result += CalcSpotLight( spotLight, norm, FragPos, viewDir );
-
-    // Spot light 2 (foco lampara flotante sobre el ring)
-    result += CalcSpotLight( spotLight2, norm, FragPos, viewDir );
  	
-    color = vec4( result, texture(material.diffuse, TexCoords).rgb );
-    if(color.a < 0.1 && transparency==1)
+    color = vec4( result,texture(material.diffuse, TexCoords).rgb );
+	  if(color.a < 0.1 && transparency==1)
         discard;
+
 }
 
 // Calculates the color when using a directional light.
