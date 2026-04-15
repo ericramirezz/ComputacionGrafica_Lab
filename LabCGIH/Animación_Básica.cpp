@@ -107,8 +107,11 @@ glm::vec3 Light1 = glm::vec3(0);
 //Anim
 float rotBall = 0;
 bool AnimBall = false;
-float ballAltura = -0.2f;
+float ballAltura = 0.6f;
 float ballDir = 1.0f; // 1 sube y -1 baja
+float xperro = 5.0f;
+float yperro = 0.0f;
+float zperro = 0.0f;
 
 // Deltatime
 GLfloat deltaTime = 0.0f;	// Time between current frame and last frame
@@ -450,27 +453,7 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 	}
 }
 void Animation() {
-	//if (AnimBall)
-	//{
-	//	rotBall += 0.4f;//modifique la velocidad para la rotacion 
-	//	//printf("%f", rotBall);
-	//}
-	//else
-	//{
-	//	//rotBall = 0.0f;
-	//}
-	if (AnimBall) {
-		printf("%f , %f || ", ballAltura, ballDir);
-		ballAltura = ballAltura + (0.01f * ballDir);
-
-		if (ballAltura >= 1.6f) {
-			ballDir = -1.0f;
-		}  // llegó arriba, baja
-		if (ballAltura <= -0.2f) {
-			ballAltura = -0.2f;
-			ballDir = 1.0f;
-		} // llegó abajo, sube
-    }
+	
 }
 
 void MouseCallback(GLFWwindow *window, double xPos, double yPos)
