@@ -1,7 +1,7 @@
 //Eric Ramírez Valdovinos
 //423095203
 // Practica 11: Animación por máquina de estados
-//Fecha de entrega: 21/04/2026
+//Fecha de entrega: 26/04/2026
 
 #include <iostream>
 #include <cmath>
@@ -515,12 +515,12 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 	
 }
 void Animation() {
-	if (AnimBall){
+	if (AnimBall) {
 		rotBall += 0.4f;
 		//printf("%f", rotBall);
 	}
-	
-	if (AnimDog){
+
+	if (AnimDog) {
 		rotDog -= 0.6f;
 		//printf("%f", rotBall);
 	}
@@ -531,7 +531,7 @@ void Animation() {
 			FLegs += 0.3f;
 			head += 0.15f;
 			tail += 0.15f;
-			if(RLegs > 32.0f) //condition
+			if (RLegs > 32.0f) //condition
 				step = true;
 		}
 		else {
@@ -542,12 +542,31 @@ void Animation() {
 			if (RLegs < -15.0f) //condition para el movimeinto para atras
 				step = false;
 		}
+		if (dogPos.z <= 2.3f and dogPos.z > -2.3 and dogPos.x < 2.3f) {
+			dogPos.z += 0.005f;
+			printf("%f, %f", dogPos.x, dogPos.z);
 
-		dogPos.z += 0.005f;
-		//printf("%f", dogPos.z);
-		if (dogPos.z >= 2.3f) dogAnim = 0;
+		}else if (dogPos.z >= 2.3 and dogPos.x < 2.3f) {
+			//primer giro
+			dogPos.x += 0.005f;
+			printf("%f", dogPos.x);
+
+		}else if (dogPos.z >= -2.3 and dogPos.x >= 2.3f) {
+			//segundo giro
+			dogPos.z -= 0.005f;
+			printf("Entra a giro dos");
+
+		}else if (dogPos.z <= -2.3 and dogPos.x > 2.3f) {
+			//tercer giro
+			dogPos.x -= 0.005f;
+			printf("Entra a giro TRES");
+		}else if (dogPos.z <= -2.3 and dogPos.x <= -2.3f) {
+			//en diagonal
+			dogPos.x += 0.005f;
+			dogPos.z += 0.005f;
+		}
+
 	}
-	
 }
 
 void MouseCallback(GLFWwindow *window, double xPos, double yPos)
