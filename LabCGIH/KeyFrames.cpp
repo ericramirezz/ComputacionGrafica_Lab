@@ -1,8 +1,10 @@
 //Eric Ramirez Valdovinos
 //423095203
-//Previo 12: Animación por KeyFrames
-//Fecha de entrega: 28 de abril de 2026
+//Práctica 12: Animación por KeyFrames
+//Fecha de entrega: 03 de mayo de 2026
+
 #include <iostream>
+#include <fstream>  //para guardar animacion en .txt
 #include <cmath>
 
 // GLEW
@@ -34,6 +36,8 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 void MouseCallback(GLFWwindow* window, double xPos, double yPos);
 void DoMovement();
 void Animation();
+void serializarTxt(const char* filename);
+void reproducirAnimacion(const char* filename);
 
 // Window dimensions
 const GLuint WIDTH = 800, HEIGHT = 600;
@@ -106,34 +110,39 @@ glm::vec3 Light1 = glm::vec3(0);
 //Anim
 float rotBall = 0.0f;
 float rotDog = 0.0f;   //rotacion en Y (girar al perro) 
-float rotDogX = 0.0f;   // Rotacion en X (inclinar, sentar)
+float rotDogX = 0.0f;   //rotacion en X (inclinar, sentar)
+float rotDogZ = 0.0f; //rotar el perro en Z para que se haga el muerto en el piso
 int dogAnim = 0;
-float FLegs = 0.0f;  
-float RLegs = 0.0f; 
-float head = 0.0f;  
-float tail = 0.0f;  
+float FLegs = 0.0f;
+float RLegs = 0.0f;
+float head = 0.0f;
+float tail = 0.0f;
+
 //variables individuales
-float rotFL = 0.0f;  // Pata Delantera Izq 
-float rotFR = 0.0f;  // Pata Delantera Der 
-float rotBL = 0.0f;  // Pata Trasera Izq   
-float rotBR = 0.0f;  // Pata Trasera Der   
+float rotFL = 0.0f;  //pata delantera izq 
+float rotFR = 0.0f;  //pata delantera der 
+float rotBL = 0.0f;  //pata trasera izq   
+float rotBR = 0.0f;  //pata trasera der   
 
 
 
 //KeyFrames
 float dogPosX, dogPosY, dogPosZ; //posiciones en XYZ del perro
 
-#define MAX_FRAMES 9 //nuemro maximos de keyframes
-int i_max_steps = 120;  // velocidad aumentada (era 190)
-int i_curr_steps = 0; // para saber el keyframe actual
+#define MAX_FRAMES 35 //nuemro maximos de keyframes
+int i_max_steps = 120;  //velocidad
+int i_curr_steps = 0; //para saber el keyframe actual
 
 
 typedef struct _frame { //estructura para definir cada keyframe
 	//rotacion del modelo
 	float rotDog;
 	float rotDogInc;
-	float rotDogX;      // inclinacion en X (sentarse)
+	float rotDogX; //inclinacion en X (sentarse)
 	float rotDogXInc;
+
+	float rotDogZ; //rotar de lado (acostarse)
+	float rotDogZInc;
 	//posicion del modelo
 	float dogPosX;
 	float dogPosY;
@@ -142,22 +151,26 @@ typedef struct _frame { //estructura para definir cada keyframe
 	float incY;
 	float incZ;
 
-	float head; 
+	float head;
 	float headInc;
 
 	//cola
 	float tail;
 	float tailInc;
 
+	//pata izquierda delantera
 	float rotFL;
 	float rotFLInc;
 
+	//pata derecha delantera
 	float rotFR;
 	float rotFRInc;
 
+	//pata izquierda trasera
 	float rotBL;
 	float rotBLInc;
 
+	//pata derecha trasera
 	float rotBR;
 	float rotBRInc;
 
@@ -171,13 +184,14 @@ int playIndex = 0; //en que punto de la linea del tiempo me encuentro
 void saveFrame(void)
 {
 
-	printf("frameindex %d\n", FrameIndex);
+	printf("Index del frame: %d\n", FrameIndex);
 
 	KeyFrame[FrameIndex].dogPosX = dogPosX;
 	KeyFrame[FrameIndex].dogPosY = dogPosY;
 	KeyFrame[FrameIndex].dogPosZ = dogPosZ;
 	KeyFrame[FrameIndex].rotDog = rotDog;
 	KeyFrame[FrameIndex].rotDogX = rotDogX;
+	KeyFrame[FrameIndex].rotDogZ = rotDogZ;
 	KeyFrame[FrameIndex].head = head;
 	KeyFrame[FrameIndex].tail = tail;
 	KeyFrame[FrameIndex].rotFL = rotFL;
@@ -195,6 +209,7 @@ void resetElements(void)
 	dogPosZ = KeyFrame[0].dogPosZ;
 	rotDog = KeyFrame[0].rotDog;
 	rotDogX = KeyFrame[0].rotDogX;
+	rotDogZ = KeyFrame[0].rotDogZ;
 	head = KeyFrame[0].head;
 	tail = KeyFrame[0].tail;
 	rotFL = KeyFrame[0].rotFL;
@@ -209,6 +224,7 @@ void interpolation(void)
 	KeyFrame[playIndex].incZ = (KeyFrame[playIndex + 1].dogPosZ - KeyFrame[playIndex].dogPosZ) / i_max_steps;
 	KeyFrame[playIndex].rotDogInc = (KeyFrame[playIndex + 1].rotDog - KeyFrame[playIndex].rotDog) / i_max_steps;
 	KeyFrame[playIndex].rotDogXInc = (KeyFrame[playIndex + 1].rotDogX - KeyFrame[playIndex].rotDogX) / i_max_steps;
+	KeyFrame[playIndex].rotDogZInc = (KeyFrame[playIndex + 1].rotDogZ - KeyFrame[playIndex].rotDogZ) / i_max_steps;
 	KeyFrame[playIndex].headInc = (KeyFrame[playIndex + 1].head - KeyFrame[playIndex].head) / i_max_steps;
 	KeyFrame[playIndex].tailInc = (KeyFrame[playIndex + 1].tail - KeyFrame[playIndex].tail) / i_max_steps;
 	KeyFrame[playIndex].rotFLInc = (KeyFrame[playIndex + 1].rotFL - KeyFrame[playIndex].rotFL) / i_max_steps;
@@ -218,6 +234,83 @@ void interpolation(void)
 }
 
 
+
+
+void serializarTxt(const char* filename){
+	//guarda todos los keyframes grabados en un archivo .txt
+	//la primera linea del txt = numero de frames
+	//luego una linea por frame con 11 valores separados por espacio
+
+	//necesitamos al menos dos puntos para crear una animacion
+	if (FrameIndex < 2) {
+		printf("mínimo 2 frames para guardar una animación\n");
+		return;
+	}
+	std::ofstream file(filename);
+	if (!file.is_open()) {
+		printf("Error: no se pudo abrir '%s' para escritura.\n", filename);
+		return;
+	}
+	//escribimos el total de frames como cabecera del archivo
+	file << FrameIndex << "\n";
+	for (int i = 0; i < FrameIndex; i++) {
+		//guardamos todas las variables del perro en una sola linea
+		file << KeyFrame[i].dogPosX << " "
+			<< KeyFrame[i].dogPosY << " "
+			<< KeyFrame[i].dogPosZ << " "
+			<< KeyFrame[i].rotDog << " "
+			<< KeyFrame[i].rotDogX << " "
+			<< KeyFrame[i].rotDogZ << " "
+			<< KeyFrame[i].head << " "
+			<< KeyFrame[i].tail << " "
+			<< KeyFrame[i].rotFL << " "
+			<< KeyFrame[i].rotFR << " "
+			<< KeyFrame[i].rotBL << " "
+			<< KeyFrame[i].rotBR << "\n";
+	}
+	file.close(); //cerramos el flujo del archivo
+	printf("Animacion guardada en '%s' (%d keyframes).\n", filename, FrameIndex);
+}
+
+void reproducirAnimacion(const char* filename){
+	//carga keyframes desde un archivo .txt.
+	//se llama automaticamente al inicio del programa
+	//si el archivo no existe simplemente no hace nada
+
+	std::ifstream file(filename);
+	if (!file.is_open()) {
+		printf("no se encontro '%s'. empieza a grabar con k.\n", filename);
+		return;
+	}
+	int count = 0;
+	//leemos la primera linea para saber cuantos frames cargar
+	file >> count;
+	//validamos que el archivo sea compatible con nuestra capacidad
+	if (count < 2 || count > MAX_FRAMES) {
+		printf("archivo '%s' invalido o demasiados frames (%d).\n", filename, count);
+		file.close();
+		return;
+	}
+	for (int i = 0; i < count; i++) {
+		//leemos los 11 valores en el mismo orden en que se guardaron
+		file >> KeyFrame[i].dogPosX
+			>> KeyFrame[i].dogPosY
+			>> KeyFrame[i].dogPosZ
+			>> KeyFrame[i].rotDog
+			>> KeyFrame[i].rotDogX
+			>> KeyFrame[i].rotDogZ
+			>> KeyFrame[i].head
+			>> KeyFrame[i].tail
+			>> KeyFrame[i].rotFL
+			>> KeyFrame[i].rotFR
+			>> KeyFrame[i].rotBL
+			>> KeyFrame[i].rotBR;
+	}
+	//actualizamos el contador global con lo que acabamos de leer
+	FrameIndex = count;
+	file.close();
+	printf("Animacion cargada de '%s' (%d keyframes). Presiona L para reproducir.\n", filename, FrameIndex);
+}
 
 // Deltatime
 GLfloat deltaTime = 0.0f;	// Time between current frame and last frame
@@ -235,7 +328,7 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);*/
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Previo 12: Animacion por KeyFrames - Eric Ramirez", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Practica 12: Animacion por KeyFrames - Eric Ramirez", nullptr, nullptr);
 
 	if (nullptr == window)
 	{
@@ -297,6 +390,7 @@ int main()
 		KeyFrame[i].incZ = 0;
 		KeyFrame[i].rotDog = 0; KeyFrame[i].rotDogInc = 0;
 		KeyFrame[i].rotDogX = 0; KeyFrame[i].rotDogXInc = 0;
+		KeyFrame[i].rotDogZ = 0; KeyFrame[i].rotDogZInc = 0;
 		KeyFrame[i].head = 0; KeyFrame[i].headInc = 0;
 		KeyFrame[i].tail = 0; KeyFrame[i].tailInc = 0;
 		KeyFrame[i].rotFL = 0; KeyFrame[i].rotFLInc = 0;
@@ -305,6 +399,8 @@ int main()
 		KeyFrame[i].rotBR = 0; KeyFrame[i].rotBRInc = 0;
 	}
 
+	//Cargar animacion guardada automaticamente al iniciar
+	reproducirAnimacion("anim_perro.txt");
 
 	// First, set the container's VAO (and VBO)
 	GLuint VBO, VAO, EBO;
@@ -353,10 +449,7 @@ int main()
 		// OpenGL options
 		glEnable(GL_DEPTH_TEST);
 
-
 		glm::mat4 modelTemp = glm::mat4(1.0f); //Temp
-
-
 
 		// Use cooresponding shader when setting uniforms/drawing objects
 		lightingShader.Use();
@@ -437,7 +530,8 @@ int main()
 		//Body
 		modelTemp = model = glm::translate(model, glm::vec3(dogPosX, dogPosY, dogPosZ));
 		modelTemp = model = glm::rotate(model, glm::radians(rotDog), glm::vec3(0.0f, 1.0f, 0.0f));
-		modelTemp = model = glm::rotate(model, glm::radians(rotDogX), glm::vec3(1.0f, 0.0f, 0.0f)); // inclinar/sentar
+		modelTemp = model = glm::rotate(model, glm::radians(rotDogX), glm::vec3(1.0f, 0.0f, 0.0f));// inclinar/sentar
+		modelTemp = model = glm::rotate(model, glm::radians(rotDogZ), glm::vec3(0.0f, 0.0f, 1.0f)); // acostarse de lado
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		DogBody.Draw(lightingShader);
 		//Head
@@ -566,19 +660,17 @@ void DoMovement()
 	if (keys[GLFW_KEY_N]) rotBR += 1.0f;
 	if (keys[GLFW_KEY_M]) rotBR -= 1.0f;
 
-	if (keys[GLFW_KEY_2])
-	{
-		rotDog += 1.0f;
-	}
+	if (keys[GLFW_KEY_2]) rotDog += 1.0f; //rota derecha
 
-	if (keys[GLFW_KEY_3])
-	{
-		rotDog -= 1.0f;
-	}
+	if (keys[GLFW_KEY_3]) rotDog -= 1.0f; //rota izquierda
 
 	//inclinacion en X del cuerpo (sentarse): O inclina hacia abajo / P endereza
 	if (keys[GLFW_KEY_O]) rotDogX += 1.0f;
 	if (keys[GLFW_KEY_P]) rotDogX -= 1.0f;
+
+	//rotar cuerpo en Z (acostarse de lado): 6 izquierda / 7 derecha
+	if (keys[GLFW_KEY_6]) rotDogZ += 1.0f;
+	if (keys[GLFW_KEY_7]) rotDogZ -= 1.0f;
 
 	if (keys[GLFW_KEY_H])
 	{
@@ -599,6 +691,11 @@ void DoMovement()
 	{
 		dogPosX += 0.01;
 	}
+
+	//bajar/subir perro en Y: 4 baja / 5 sube
+	if (keys[GLFW_KEY_4]) dogPosY -= 0.01f;
+	if (keys[GLFW_KEY_5]) dogPosY += 0.01f;
+
 
 	// Camera controls
 	if (keys[GLFW_KEY_W] || keys[GLFW_KEY_UP])
@@ -690,6 +787,23 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 
 	}
 
+	if (key == GLFW_KEY_F2 && action == GLFW_PRESS){
+		//F2 para guardar animacion en archivo para que persista al cerrar
+		serializarTxt("anim_perro.txt");
+	}
+
+	if (key == GLFW_KEY_F3 && action == GLFW_PRESS){
+		//F3 para resetear animacion (borra keyframes en memoria y el archivo)
+		FrameIndex = 0; //limpiar keyframes en memoria
+		playIndex = 0;
+		play = false;
+
+		//borra el archivo guardado
+		remove("anim_perro.txt");
+
+		printf("Animacion reseteada.\n");
+	}
+
 
 
 	if (GLFW_KEY_ESCAPE == key && GLFW_PRESS == action)
@@ -753,6 +867,7 @@ void Animation() {
 			dogPosZ += KeyFrame[playIndex].incZ;
 			rotDog += KeyFrame[playIndex].rotDogInc;
 			rotDogX += KeyFrame[playIndex].rotDogXInc;
+			rotDogZ += KeyFrame[playIndex].rotDogZInc; 
 			head += KeyFrame[playIndex].headInc;
 			tail += KeyFrame[playIndex].tailInc;
 			rotFL += KeyFrame[playIndex].rotFLInc;
